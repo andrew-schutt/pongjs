@@ -1,3 +1,4 @@
+
 var gameBoard = board(300, 300);
 gameBoard.drawBoard();
 var leftPaddle = paddle(gameBoard, 'left');

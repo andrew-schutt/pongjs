@@ -1,3 +1,4 @@
+
 var board = function(width, height) {
     var ctx;
 

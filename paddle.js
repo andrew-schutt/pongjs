@@ -1,5 +1,4 @@
 
-
 var paddle = function(gameBoard, paddleType) {
     var width = 5,
         height = 20,
@@ -7,6 +6,7 @@ var paddle = function(gameBoard, paddleType) {
         positionY;
 
     function drawPaddle(x, y) {
+        clearPaddle();
         gameBoard.getContext().fillStyle = 'white';
         gameBoard.getContext().fillRect(x, y, width, height);
         positionX = x;
@@ -19,12 +19,10 @@ var paddle = function(gameBoard, paddleType) {
     }
 
     function movePaddleDown() {
-        clearPaddle();
         drawPaddle(getLocation()[0], getLocation()[1] - 2);
     }
 
     function movePaddleUp() {
-        clearPaddle();
         drawPaddle(getLocation()[0], getLocation()[1] + 2);
     }
 
