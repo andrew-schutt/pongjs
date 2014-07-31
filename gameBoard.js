@@ -2,9 +2,6 @@ var board = function(width, height) {
     var ctx;
 
     function init() {
-//    ctx.fillStyle = 'white';
-//    ctx.font = '12px sans-serif';
-//    ctx.fillText('Start Game?', 2, 12);
     }
 
     function drawBoard() {
