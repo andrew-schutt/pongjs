@@ -19,13 +19,13 @@ var paddle = function(gameBoard, paddleType) {
     }
 
     function movePaddleDown() {
-        this.clearPaddle();
-        this.drawPaddle(this.getLocation()[0], this.getLocation()[1] - 1);
+        clearPaddle();
+        drawPaddle(getLocation()[0], getLocation()[1] - 2);
     }
 
     function movePaddleUp() {
-        this.clearPaddle();
-        this.drawPaddle(this.getLocation()[0], this.getLocation()[1] + 1);
+        clearPaddle();
+        drawPaddle(getLocation()[0], getLocation()[1] + 2);
     }
 
     function init() {
@@ -34,9 +34,29 @@ var paddle = function(gameBoard, paddleType) {
 
         if (paddleType === 'left'){
             paddleStartX = 2;
+
+            // left player controls
+            window.addEventListener('keydown', function (e) {
+                console.log(e.keyCode);
+                if (e.keyCode === 87) {
+                    leftPaddle.movePaddleDown();
+                } else if (e.keyCode === 83) {
+                    leftPaddle.movePaddleUp();
+                }
+            });
         }
         else {
             paddleStartX = gameBoard.getWidth() - (width + 2);
+
+            // right player controls
+            window.addEventListener('keydown', function (e) {
+                console.log(e.keyCode);
+                if (e.keyCode === 79) {
+                    rightPaddle.movePaddleDown();
+                } else if (e.keyCode === 75) {
+                    rightPaddle.movePaddleUp();
+                }
+            });
         }
         drawPaddle(paddleStartX, paddleStartY, width, height);
     }
