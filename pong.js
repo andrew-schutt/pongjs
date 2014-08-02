@@ -8,4 +8,5 @@ setInterval(function () {
     gameBoard.drawBoard();
     leftPaddle.drawPaddle();
     rightPaddle.drawPaddle();
+    ball.drawBall();
 }, 1);

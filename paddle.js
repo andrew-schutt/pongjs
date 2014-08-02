@@ -15,9 +15,7 @@ var paddle = function (gameBoard, paddleType) {
         gameBoard.getContext().fillRect(positionX, positionY, paddleWidth, paddleHeight);
     }
 
-    function updateLocation(x, y) {
-        positionX = x;
-
+    function updateLocation(y) {
         if (y <= 0) {
             positionY = 0;
         }
@@ -30,11 +28,15 @@ var paddle = function (gameBoard, paddleType) {
     }
 
     function movePaddleDown() {
-        updateLocation(getX(), getY() + 1)
+        updateLocation(getY() + 1)
     }
 
     function movePaddleUp() {
-        updateLocation(getX(), getY() - 1)
+        updateLocation(getY() - 1)
+    }
+
+    function getY() {
+        return positionY;
     }
 
     function init() {
@@ -100,14 +102,6 @@ var paddle = function (gameBoard, paddleType) {
             });
             positionX = gameBoard.getWidth() - (paddleWidth + 2);
         }
-    }
-
-    function getX() {
-        return positionX;
-    }
-
-    function getY() {
-        return positionY;
     }
 
     init();

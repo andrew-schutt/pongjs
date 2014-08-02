@@ -4,7 +4,7 @@ var ball = function(gameBoard) {
         yPos = 0,
         size = 4;
 
-    function drawPong(x, y) {
+    function drawBall(x, y) {
         gameBoard.getContext().fillStyle = 'white';
         gameBoard.getContext().fillRect(x, y, size, size);
     }
@@ -16,12 +16,13 @@ var ball = function(gameBoard) {
         xPos = ballStartX;
         yPos = ballStartY;
 
-        drawPong(ballStartX, ballStartY);
+        drawBall(ballStartX, ballStartY);
     }
 
     init();
     return {
         init: init,
-        drawPong: drawPong
+        drawBall: drawBall
+
     };
 };

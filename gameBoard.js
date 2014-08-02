@@ -2,9 +2,6 @@
 var board = function(width, height) {
     var ctx;
 
-    function init() {
-    }
-
     function drawBoard() {
         var canvas = document.getElementById('gameBoard');
         ctx = canvas.getContext('2d');
@@ -25,6 +22,9 @@ var board = function(width, height) {
 
     function getHeight() {
         return height;
+    }
+
+    function init() {
     }
 
     init();
