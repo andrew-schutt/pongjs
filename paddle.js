@@ -16,6 +16,9 @@ var paddle = function (gameBoard, paddleType) {
     }
 
     function updateLocation(x, y) {
+//        gameBoard.getHeight();
+        console.log(positionY);
+        
         positionX = x;
         positionY = y;
     }
@@ -32,6 +35,16 @@ var paddle = function (gameBoard, paddleType) {
         positionY = (gameBoard.getHeight()) / 2 - (height / 2);
 
         if (paddleType === 'left') {
+            window.addEventListener('keyup', function (e) {
+                if (e.keyCode === w) {
+                    clearInterval(moveUp);
+                    moveUp = undefined;
+                }
+                else if (e.keyCode === s) {
+                    clearInterval(moveDown);
+                    moveDown = undefined;
+                }
+            });
             window.addEventListener('keydown', function (e) {
                 if (e.keyCode === s) {
                     if (!moveDown) {
@@ -51,6 +64,17 @@ var paddle = function (gameBoard, paddleType) {
             positionX = 2;
         }
         else {
+            window.addEventListener('keyup', function (e) {
+                if (e.keyCode === o) {
+                    clearInterval(moveUp);
+                    moveUp = undefined;
+                }
+                else if (e.keyCode === k) {
+                    clearInterval(moveDown);
+                    moveDown = undefined;
+                }
+            });
+
             window.addEventListener('keydown', function (e) {
                 if (e.keyCode === k) {
                     if (!moveDown) {
@@ -69,17 +93,6 @@ var paddle = function (gameBoard, paddleType) {
                 positionX = gameBoard.getWidth() - (width + 2);
             });
         }
-
-        window.addEventListener('keyup', function (e) {
-            if (e.keyCode === w || e.keyCode === o) {
-                clearInterval(moveUp);
-                moveUp = undefined;
-            }
-            else if (e.keyCode === s || e.keyCode === k) {
-                clearInterval(moveDown);
-                moveDown = undefined;
-            }
-        });
     }
 
     function getX() {
