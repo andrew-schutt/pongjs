@@ -1,5 +1,4 @@
-
-var paddle = function(gameBoard, paddleType) {
+var paddle = function (gameBoard, paddleType) {
     var width = 5,
         height = 20,
         positionX,
@@ -12,8 +11,8 @@ var paddle = function(gameBoard, paddleType) {
         o = 79;
 
     function drawPaddle() {
-            gameBoard.getContext().fillStyle = 'white';
-            gameBoard.getContext().fillRect(positionX, positionY, width, height);
+        gameBoard.getContext().fillStyle = 'white';
+        gameBoard.getContext().fillRect(positionX, positionY, width, height);
     }
 
     function updateLocation(x, y) {
@@ -30,64 +29,57 @@ var paddle = function(gameBoard, paddleType) {
     }
 
     function init() {
-        console.log(paddleType);
-        var paddleStartY = (gameBoard.getHeight()) / 2 - (height / 2),
-            paddleStartX;
+        positionY = (gameBoard.getHeight()) / 2 - (height / 2);
 
-        window.addEventListener('keydown', function (e) {
-            console.log(e.keyCode);
-            if (e.keyCode === s) {
-//                console.log(moveDown)
-                if (!moveDown){
-                    moveDown = setInterval(function () {
-                        leftPaddle.movePaddleDown()
-                    }, 1);
+        if (paddleType === 'left') {
+            window.addEventListener('keydown', function (e) {
+                if (e.keyCode === s) {
+                    if (!moveDown) {
+                        moveDown = setInterval(function () {
+                            leftPaddle.movePaddleDown()
+                        }, 1);
+                    }
                 }
-            }
-            else if (e.keyCode === w) {
-                if (!moveUp){
-                    moveUp = setInterval(function () {
-                        leftPaddle.movePaddleUp()
-                    }, 1);
+                else if (e.keyCode === w) {
+                    if (!moveUp) {
+                        moveUp = setInterval(function () {
+                            leftPaddle.movePaddleUp()
+                        }, 1);
+                    }
                 }
-            }
-            else if (e.keyCode === k) {
-                if (!moveDown){
-                    moveDown = setInterval(function () {
-                        rightPaddle.movePaddleDown()
-                    }, 1);
+            });
+            positionX = 2;
+        }
+        else {
+            window.addEventListener('keydown', function (e) {
+                if (e.keyCode === k) {
+                    if (!moveDown) {
+                        moveDown = setInterval(function () {
+                            rightPaddle.movePaddleDown()
+                        }, 1);
+                    }
                 }
-            }
-            else if (e.keyCode === o) {
-                if (!moveUp){
-                    moveUp = setInterval(function () {
-                        rightPaddle.movePaddleUp()
-                    }, 1);
+                else if (e.keyCode === o) {
+                    if (!moveUp) {
+                        moveUp = setInterval(function () {
+                            rightPaddle.movePaddleUp()
+                        }, 1);
+                    }
                 }
-            }
-        });
+                positionX = gameBoard.getWidth() - (width + 2);
+            });
+        }
 
         window.addEventListener('keyup', function (e) {
-//            console.log(e.keyCode);
             if (e.keyCode === w || e.keyCode === o) {
-              clearInterval(moveUp);
-              moveUp = undefined;
+                clearInterval(moveUp);
+                moveUp = undefined;
             }
             else if (e.keyCode === s || e.keyCode === k) {
                 clearInterval(moveDown);
                 moveDown = undefined;
             }
         });
-
-        if (paddleType === 'left'){
-            paddleStartX = 2;
-        }
-        else {
-            paddleStartX = gameBoard.getWidth() - (width + 2);
-        }
-        positionX = paddleStartX;
-        positionY = paddleStartY;
-        drawPaddle();
     }
 
     function getX() {
