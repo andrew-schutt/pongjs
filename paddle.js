@@ -3,73 +3,106 @@ var paddle = function(gameBoard, paddleType) {
     var width = 5,
         height = 20,
         positionX,
-        positionY;
+        positionY,
+        moveUp,
+        moveDown,
+        w = 87,
+        s = 83,
+        k = 75,
+        o = 79;
 
-    function drawPaddle(x, y) {
-        clearPaddle();
-        gameBoard.getContext().fillStyle = 'white';
-        gameBoard.getContext().fillRect(x, y, width, height);
+    function drawPaddle() {
+            gameBoard.getContext().fillStyle = 'white';
+            gameBoard.getContext().fillRect(positionX, positionY, width, height);
+    }
+
+    function updateLocation(x, y) {
         positionX = x;
         positionY = y;
     }
 
-    function clearPaddle() {
-        gameBoard.getContext().fillStyle = 'black';
-        gameBoard.getContext().fillRect(positionX, positionY, width, height);
-    }
-
     function movePaddleDown() {
-        drawPaddle(getLocation()[0], getLocation()[1] - 2);
+        updateLocation(getX(), getY() + 1)
     }
 
     function movePaddleUp() {
-        drawPaddle(getLocation()[0], getLocation()[1] + 2);
+        updateLocation(getX(), getY() - 1)
     }
 
     function init() {
+        console.log(paddleType);
         var paddleStartY = (gameBoard.getHeight()) / 2 - (height / 2),
             paddleStartX;
 
+        window.addEventListener('keydown', function (e) {
+            console.log(e.keyCode);
+            if (e.keyCode === s) {
+//                console.log(moveDown)
+                if (!moveDown){
+                    moveDown = setInterval(function () {
+                        leftPaddle.movePaddleDown()
+                    }, 1);
+                }
+            }
+            else if (e.keyCode === w) {
+                if (!moveUp){
+                    moveUp = setInterval(function () {
+                        leftPaddle.movePaddleUp()
+                    }, 1);
+                }
+            }
+            else if (e.keyCode === k) {
+                if (!moveDown){
+                    moveDown = setInterval(function () {
+                        rightPaddle.movePaddleDown()
+                    }, 1);
+                }
+            }
+            else if (e.keyCode === o) {
+                if (!moveUp){
+                    moveUp = setInterval(function () {
+                        rightPaddle.movePaddleUp()
+                    }, 1);
+                }
+            }
+        });
+
+        window.addEventListener('keyup', function (e) {
+//            console.log(e.keyCode);
+            if (e.keyCode === w || e.keyCode === o) {
+              clearInterval(moveUp);
+              moveUp = undefined;
+            }
+            else if (e.keyCode === s || e.keyCode === k) {
+                clearInterval(moveDown);
+                moveDown = undefined;
+            }
+        });
+
         if (paddleType === 'left'){
             paddleStartX = 2;
-
-            // left player controls
-            window.addEventListener('keydown', function (e) {
-                console.log(e.keyCode);
-                if (e.keyCode === 87) {
-                    leftPaddle.movePaddleDown();
-                } else if (e.keyCode === 83) {
-                    leftPaddle.movePaddleUp();
-                }
-            });
         }
         else {
             paddleStartX = gameBoard.getWidth() - (width + 2);
-
-            // right player controls
-            window.addEventListener('keydown', function (e) {
-                console.log(e.keyCode);
-                if (e.keyCode === 79) {
-                    rightPaddle.movePaddleDown();
-                } else if (e.keyCode === 75) {
-                    rightPaddle.movePaddleUp();
-                }
-            });
         }
-        drawPaddle(paddleStartX, paddleStartY, width, height);
+        positionX = paddleStartX;
+        positionY = paddleStartY;
+        drawPaddle();
     }
 
-    function getLocation() {
-        return [positionX, positionY];
+    function getX() {
+        return positionX;
+    }
+
+    function getY() {
+        return positionY;
     }
 
     init();
     return {
         init: init,
         drawPaddle: drawPaddle,
-        clearPaddle: clearPaddle,
         movePaddleDown: movePaddleDown,
-        movePaddleUp: movePaddleUp,
-        getLocation: getLocation
+        movePaddleUp: movePaddleUp
     };
 };
