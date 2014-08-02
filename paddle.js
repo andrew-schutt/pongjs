@@ -1,6 +1,6 @@
 var paddle = function (gameBoard, paddleType) {
-    var width = 5,
-        height = 20,
+    var paddleWidth = 5,
+        paddleHeight = 20,
         positionX,
         positionY,
         moveUp,
@@ -12,15 +12,21 @@ var paddle = function (gameBoard, paddleType) {
 
     function drawPaddle() {
         gameBoard.getContext().fillStyle = 'white';
-        gameBoard.getContext().fillRect(positionX, positionY, width, height);
+        gameBoard.getContext().fillRect(positionX, positionY, paddleWidth, paddleHeight);
     }
 
     function updateLocation(x, y) {
-//        gameBoard.getHeight();
-        console.log(positionY);
-        
         positionX = x;
-        positionY = y;
+
+        if (y <= 0) {
+            positionY = 0;
+        }
+        else if (y >= gameBoard.getHeight() - paddleHeight) {
+            positionY = gameBoard.getHeight() - paddleHeight;
+        }
+        else {
+            positionY = y;
+        }
     }
 
     function movePaddleDown() {
@@ -32,7 +38,7 @@ var paddle = function (gameBoard, paddleType) {
     }
 
     function init() {
-        positionY = (gameBoard.getHeight()) / 2 - (height / 2);
+        positionY = (gameBoard.getHeight()) / 2 - (paddleHeight / 2);
 
         if (paddleType === 'left') {
             window.addEventListener('keyup', function (e) {
@@ -63,6 +69,7 @@ var paddle = function (gameBoard, paddleType) {
             });
             positionX = 2;
         }
+
         else {
             window.addEventListener('keyup', function (e) {
                 if (e.keyCode === o) {
@@ -90,8 +97,8 @@ var paddle = function (gameBoard, paddleType) {
                         }, 1);
                     }
                 }
-                positionX = gameBoard.getWidth() - (width + 2);
             });
+            positionX = gameBoard.getWidth() - (paddleWidth + 2);
         }
     }
 
