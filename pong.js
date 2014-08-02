@@ -9,9 +9,3 @@ setInterval(function () {
     leftPaddle.drawPaddle();
     rightPaddle.drawPaddle();
 }, 1);
-
-/* while (playing bool) {
-    ball.drawBall(x, y)
-    gameBoard.detect collisions
-}
- */
