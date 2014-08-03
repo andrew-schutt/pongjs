@@ -1,22 +1,46 @@
-
 var ball = function(gameBoard) {
-    var xPos = 0,
-        yPos = 0,
+    var curX = 0,
+        curY = 0,
+        prevX = 0,
+        prevY = 0,
         size = 4;
 
-    function drawBall(x, y) {
+    function drawBall() {
+
+        if (curX >= gameBoard.getWidth() || curX <= 0) {
+           if (curX >= gameBoard.getWidth()) {
+               prevX = curX;
+               curX -= 1;
+           }
+           else {
+               prevX = curX;
+               curX += 1;
+           }
+        }
+        else if (curX != prevX) {
+            if (prevX > curX) {
+                prevX = curX;
+                curX -= 1;
+            }
+            else if (prevX < curX) {
+                prevX = curX;
+                curX += 1;
+            }
+        } else {
+            prevX = curX;
+            curX += 1;
+        }
+
         gameBoard.getContext().fillStyle = 'white';
-        gameBoard.getContext().fillRect(x, y, size, size);
+        gameBoard.getContext().fillRect(curX, curY, size, size);
     }
 
     function init() {
-        var ballStartY = (gameBoard.getHeight() / 2 - (size / 2)),
-            ballStartX = (gameBoard.getWidth() / 2 - (size / 2));
-
-        xPos = ballStartX;
-        yPos = ballStartY;
-
-        drawBall(ballStartX, ballStartY);
+        curX = (gameBoard.getHeight() / 2 - (size / 2));
+        curY = (gameBoard.getWidth() / 2 - (size / 2));
+        prevX = curX;
+        prevY = curY;
+        drawBall();
     }
 
     init();
@@ -24,5 +48,5 @@ var ball = function(gameBoard) {
         init: init,
         drawBall: drawBall
 
-    };
+    }
 };
