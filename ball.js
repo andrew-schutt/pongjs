@@ -31,8 +31,40 @@ var ball = function(gameBoard) {
             curX += 1;
         }
 
+        if (curY >= gameBoard.getHeight() || curY <= 0) {
+           if (curY >= gameBoard.getHeight()) {
+               prevY = curY;
+               curY -= 1;
+           }
+           else {
+               prevY = curY;
+               curY += 1;
+           }
+        }
+        else if (curY != prevY) {
+            if (prevX > curY) {
+                prevY = curY;
+                curY -= 1;
+            }
+            else if (prevY < curY) {
+                prevY = curY;
+                curY += 1;
+            }
+        } else {
+            prevY = curY;
+            curY += 1;
+        }
+
         gameBoard.getContext().fillStyle = 'white';
         gameBoard.getContext().fillRect(curX, curY, size, size);
+    }
+
+    function getX() {
+        return curX;
+    }
+
+    function getY() {
+        return curY;
     }
 
     function init() {
