@@ -39,6 +39,18 @@ var paddle = function (gameBoard, paddleType) {
         return positionY;
     }
 
+    function getX() {
+        return positionX;
+    }
+
+    function getWidth() {
+        return paddleWidth;
+    }
+
+    function getHeight() {
+        return paddleHeight;
+    }
+
     function init() {
         positionY = (gameBoard.getHeight()) / 2 - (paddleHeight / 2);
 
@@ -109,6 +121,10 @@ var paddle = function (gameBoard, paddleType) {
         init: init,
         drawPaddle: drawPaddle,
         movePaddleDown: movePaddleDown,
-        movePaddleUp: movePaddleUp
+        movePaddleUp: movePaddleUp,
+        getWidth: getWidth,
+        getHeight: getHeight,
+        getX: getX,
+        getY: getY
     };
 };

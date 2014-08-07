@@ -11,6 +11,6 @@ var startGame = function () {
         gameBoard.drawBoard();
         leftPaddle.drawPaddle();
         rightPaddle.drawPaddle();
-        ball.drawBall();
+        gameBoard.moveBall();
     }, 1);
 };

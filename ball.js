@@ -5,58 +5,17 @@ var ball = function(gameBoard) {
         prevY = 0,
         size = 4;
 
-    function drawBall() {
 
-        if (curX >= gameBoard.getWidth() || curX <= 0) {
-           if (curX >= gameBoard.getWidth()) {
-               prevX = curX;
-               curX -= 1;
-           }
-           else {
-               prevX = curX;
-               curX += 1;
-           }
-        }
-        else if (curX != prevX) {
-            if (prevX > curX) {
-                prevX = curX;
-                curX -= 1;
-            }
-            else if (prevX < curX) {
-                prevX = curX;
-                curX += 1;
-            }
-        } else {
-            prevX = curX;
-            curX += 1;
-        }
-
-        if (curY >= gameBoard.getHeight() || curY <= 0) {
-           if (curY >= gameBoard.getHeight()) {
-               prevY = curY;
-               curY -= 1;
-           }
-           else {
-               prevY = curY;
-               curY += 1;
-           }
-        }
-        else if (curY != prevY) {
-            if (prevX > curY) {
-                prevY = curY;
-                curY -= 1;
-            }
-            else if (prevY < curY) {
-                prevY = curY;
-                curY += 1;
-            }
-        } else {
-            prevY = curY;
-            curY += 1;
-        }
-
+    // ball.js should only know it's current position while gameBoard.js will know the prev XY.
+    // gameboard will do the actual detection using where it knows the ball was and uses methods to find where the ball is
+    //
+    function drawBall(x, y) {
         gameBoard.getContext().fillStyle = 'white';
-        gameBoard.getContext().fillRect(curX, curY, size, size);
+        gameBoard.getContext().fillRect(x, y, size, size);
+        prevX = curX;
+        prevY = curY;
+        curX = x;
+        curY = y;
     }
 
     function getX() {
@@ -67,18 +26,29 @@ var ball = function(gameBoard) {
         return curY;
     }
 
+    function getPrevX() {
+        return prevX;
+    }
+
+    function getPrevY() {
+        return prevY;
+    }
+
     function init() {
         curX = (gameBoard.getHeight() / 2 - (size / 2));
         curY = (gameBoard.getWidth() / 2 - (size / 2));
         prevX = curX;
         prevY = curY;
-        drawBall();
+        drawBall(curX, curY);
     }
 
     init();
     return {
         init: init,
-        drawBall: drawBall
-
+        drawBall: drawBall,
+        getY: getY,
+        getX: getX,
+        getPrevX: getPrevX,
+        getPrevY: getPrevY
     }
 };
