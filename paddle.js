@@ -14,7 +14,6 @@ var paddle = function (gameBoard, paddleType) {
         gameBoard.getContext().fillStyle = 'white';
         gameBoard.getContext().fillRect(positionX, positionY, paddleWidth, paddleHeight);
     }
-
     function updateLocation(y) {
         if (y <= 0) {
             positionY = 0;
@@ -26,31 +25,24 @@ var paddle = function (gameBoard, paddleType) {
             positionY = y;
         }
     }
-
     function movePaddleDown() {
         updateLocation(getY() + 1)
     }
-
     function movePaddleUp() {
         updateLocation(getY() - 1)
     }
-
     function getY() {
         return positionY;
     }
-
     function getX() {
         return positionX;
     }
-
     function getWidth() {
         return paddleWidth;
     }
-
     function getHeight() {
         return paddleHeight;
     }
-
     function init() {
         positionY = (gameBoard.getHeight()) / 2 - (paddleHeight / 2);
 

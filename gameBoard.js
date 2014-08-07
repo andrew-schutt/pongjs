@@ -26,39 +26,33 @@ var board = function(width, height) {
 
     function moveBall() {
         var ballX = ball.getX(),
-            ballY = ball.getY(),
-            prevX = ball.getPrevX(),
-            prevY = ball.getPrevY();
+            ballY = ball.getY();
 
         function paddleHit(aBall, aPaddle) {
             var boardEdge;
-            if (aPaddle.getX() > gameBoard.getWidth() /2) {
+            if (aPaddle.getX() >= gameBoard.getWidth() / 2) {
                 boardEdge = gameBoard.getWidth();
-                if (aBall.getX() >= boardEdge - aPaddle.getWidth()) {
-                    if (aBall.getY() <= (aPaddle.getY() + aPaddle.getHeight() / 2) && aBall.getY() >= (aPaddle.getY() - aPaddle.getHeight() / 2)) {
+                if (aBall.getX() >= (boardEdge - aPaddle.getWidth())) {
+                    if (aBall.getY() < (aPaddle.getY() + aPaddle.getHeight() / 2) && aBall.getY() > (aPaddle.getY() - aPaddle.getHeight() / 2)) {
                         return true;
                     }
                 }
             }
-            else if (aPaddle.getX() < gameBoard.getWidth() /2) {
-               boardEdge = 0;
-                if (aBall.getX() <= boardEdge + aPaddle.getWidth()) {
-                    if (aBall.getY() <= (aPaddle.getY() + aPaddle.getHeight() / 2) && aBall.getY() >= (aPaddle.getY() - aPaddle.getHeight() / 2)) {
+            else if (aPaddle.getX() <= gameBoard.getWidth() / 2) {
+                boardEdge = 0;
+                if (aBall.getX() <= (boardEdge + aPaddle.getWidth())) {
+                    if (aBall.getY() < (aPaddle.getY() + aPaddle.getHeight() / 2) && aBall.getY() > (aPaddle.getY() - aPaddle.getHeight() / 2)) {
                         return true;
                     }
                 }
             }
-             return false;
+            return false;
         }
 
         if (paddleHit(ball, rightPaddle)) {
-            console.log("right paddle bounce")
-            prevX = ballX;
             ballX -= 1;
         }
         else if (paddleHit(ball, leftPaddle)) {
-            console.log("left paddle bounce")
-            prevX = ballX;
             ballX += 1;
         }
         else if (ballX >= gameBoard.getWidth() || ballX <= 0) {
@@ -69,37 +63,37 @@ var board = function(width, height) {
                 // TODO: scenario right player scores & game over
             }
         }
-        else if (ballX != prevX) {
-            if (prevX > ballX) {
-                prevX = ballX;
+        else if (ballX != ball.getPrevX()) {
+            if (ball.getPrevX() > ballX) {
                 ballX -= 1;
             }
-            else if (prevX < ballX) {
-                prevX = ballX;
+            else if (ball.getPrevX() < ballX) {
                 ballX += 1;
             }
-        } else {
-            prevX = ballX;
+        }
+        else {
             ballX += 1;
         }
 
-        if (ballY >= gameBoard.getHeight() || ballY <= 0) {
+        if (paddleHit(ball, rightPaddle)) {
+            ballY -= 1;
+        }
+        else if (paddleHit(ball, leftPaddle)) {
+            ballY += 1;
+        }
+        else if (ballY >= gameBoard.getHeight() || ballY <= 0) {
             if (ballY >= gameBoard.getHeight()) {
-                prevY = ballY;
                 ballY -= 1;
             }
             else {
-                prevY = ballY;
                 ballY += 1;
             }
         }
-        else if (ballY != prevY) {
-            if (prevY > ballY) {
-                prevY = ballY;
+        else if (ballY != ball.getPrevY()) {
+            if (ball.getPrevY() > ballY) {
                 ballY -= 1;
             }
-            else if (prevY < ballY) {
-                prevY = ballY;
+            else if (ball.getPrevY() < ballY) {
                 ballY += 1;
             }
         }
