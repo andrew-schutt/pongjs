@@ -3,13 +3,11 @@ var ball = function(gameBoard) {
         curY = 0,
         prevX = 0,
         prevY = 0,
-        size = 4;
+        size = 5;
 
     function drawBall(x, y) {
         gameBoard.getContext().fillStyle = 'white';
         gameBoard.getContext().fillRect(x, y, size, size);
-        console.log('prevX'+prevX);
-        console.log('prevY'+prevY);
         prevX = curX;
         prevY = curY;
         curX = x;

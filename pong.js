@@ -1,12 +1,12 @@
-var gameBoard = board(300, 300);
+var gameBoard = board(500, 500);
 gameBoard.drawBoard();
 var leftPaddle = paddle(gameBoard, 'left');
 var rightPaddle = paddle(gameBoard, 'right');
 var ball = ball(gameBoard);
 
 var startGame = function () {
-    document.getElementById("startmenu").style.display = 'none';
-
+    document.getElementById('startMenu').style.visibility = 'hidden';
+    document.getElementById('gameBoard').style.visibility = 'visible';
     setInterval(function () {
         gameBoard.drawBoard();
         leftPaddle.drawPaddle();

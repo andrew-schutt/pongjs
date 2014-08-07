@@ -1,6 +1,6 @@
 var paddle = function (gameBoard, paddleType) {
-    var paddleWidth = 5,
-        paddleHeight = 20,
+    var paddleWidth = 10,
+        paddleHeight = Math.round(gameBoard.getWidth() / 10),
         positionX,
         positionY,
         moveUp,
@@ -44,8 +44,7 @@ var paddle = function (gameBoard, paddleType) {
         return paddleHeight;
     }
     function init() {
-        positionY = (gameBoard.getHeight()) / 2 - (paddleHeight / 2);
-
+        positionY = (gameBoard.getHeight() / 2) - (paddleHeight / 2);
         if (paddleType === 'left') {
             window.addEventListener('keyup', function (e) {
                 if (e.keyCode === w) {
@@ -104,7 +103,7 @@ var paddle = function (gameBoard, paddleType) {
                     }
                 }
             });
-            positionX = gameBoard.getWidth() - (paddleWidth + 2);
+            positionX = gameBoard.getWidth() - (paddleWidth + 5);
         }
     }
 

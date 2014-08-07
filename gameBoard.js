@@ -32,16 +32,16 @@ var board = function(width, height) {
             var boardEdge;
             if (aPaddle.getX() >= gameBoard.getWidth() / 2) {
                 boardEdge = gameBoard.getWidth();
-                if (aBall.getX() >= (boardEdge - aPaddle.getWidth())) {
-                    if (aBall.getY() < (aPaddle.getY() + aPaddle.getHeight() / 2) && aBall.getY() > (aPaddle.getY() - aPaddle.getHeight() / 2)) {
+                if (aBall.getX() === (boardEdge - aPaddle.getWidth())) {
+                    if (aBall.getY() >= aPaddle.getY() && aBall.getY() <= aPaddle.getY() + aPaddle.getHeight()) {
                         return true;
                     }
                 }
             }
             else if (aPaddle.getX() <= gameBoard.getWidth() / 2) {
                 boardEdge = 0;
-                if (aBall.getX() <= (boardEdge + aPaddle.getWidth())) {
-                    if (aBall.getY() < (aPaddle.getY() + aPaddle.getHeight() / 2) && aBall.getY() > (aPaddle.getY() - aPaddle.getHeight() / 2)) {
+                if (aBall.getX() === (boardEdge + aPaddle.getWidth())) {
+                    if (aBall.getY() >= aPaddle.getY() && aBall.getY() <= aPaddle.getY() + aPaddle.getHeight()) {
                         return true;
                     }
                 }
