@@ -4,7 +4,9 @@ var ball = function(gameBoard) {
         prevX = 0,
         prevY = 0,
         size = 5;
-
+    function resetBall() {
+        init();
+    }
     function drawBall(x, y) {
         gameBoard.getContext().fillStyle = 'white';
         gameBoard.getContext().fillRect(x, y, size, size);
@@ -37,6 +39,7 @@ var ball = function(gameBoard) {
         getY: getY,
         getX: getX,
         getPrevX: getPrevX,
-        getPrevY: getPrevY
+        getPrevY: getPrevY,
+        resetBall: resetBall
     }
 };
