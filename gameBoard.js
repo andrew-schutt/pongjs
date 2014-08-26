@@ -1,6 +1,8 @@
 
 var board = function(width, height) {
     var ctx;
+    var player1Score;
+    var player2Score;
 
     function drawBoard() {
         var canvas = document.getElementById('gameBoard');
@@ -22,6 +24,19 @@ var board = function(width, height) {
 
     function getHeight() {
         return height;
+    }
+
+    function updateScore() {
+        console.log("player1Score" + player1Score);
+        console.log("player2Score" + player2Score);
+        document.getElementById('player1Score').innerText = player1Score;
+        document.getElementById('player2Score').innerText = player2Score;
+    }
+
+    function resetGame() {
+        ball.init();
+        leftPaddle.init();
+        rightPaddle.init();
     }
 
     function moveBall() {
@@ -57,10 +72,12 @@ var board = function(width, height) {
         }
         else if (ballX >= gameBoard.getWidth() || ballX <= 0) {
             if (ballX >= gameBoard.getWidth()) {
-                // TODO: scenario left player scores & game over
+                player1Score += 1;
+                resetGame();
             }
             else {
-                // TODO: scenario right player scores & game over
+                player2Score += 1;
+                resetGame();
             }
         }
         else if (ballX != ball.getPrevX()) {
@@ -101,6 +118,8 @@ var board = function(width, height) {
     }
 
     function init() {
+        player1Score = 0;
+        player2Score = 0;
     }
 
     init();
@@ -110,6 +129,7 @@ var board = function(width, height) {
         getContext: getContext,
         getHeight: getHeight,
         getWidth: getWidth,
-        moveBall: moveBall
+        moveBall: moveBall,
+        updateScore: updateScore
     };
 };
