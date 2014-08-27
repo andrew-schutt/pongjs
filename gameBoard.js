@@ -15,8 +15,10 @@ var board = function(width, height) {
     }
 
     function updateScore() {
-        document.getElementById('playertwo').innerHTML = player2Score;
-        document.getElementById('playerone').innerHTML = player1Score;
+        var oneScore = document.getElementById('playertwo');
+        var twoScore = document.getElementById('playerone');
+        oneScore.innerText = player1Score;
+        twoScore.innerText = player2Score;
     }
 
     function getContext() {
@@ -66,14 +68,16 @@ var board = function(width, height) {
             if (ballX >= gameBoard.getWidth()) {
                 player1Score += 1;
                 ball.resetBall();
-                ballX = ball.getX(),
+                ballX = ball.getX();
                 ballY = ball.getY();
+                updateScore();
             }
             else {
                 player2Score += 1;
                 ball.resetBall();
-                ballX = ball.getX(),
+                ballX = ball.getX();
                 ballY = ball.getY();
+                updateScore();
             }
         }
         else if (ballX != ball.getPrevX()) {

@@ -12,6 +12,5 @@ var startGame = function () {
         leftPaddle.drawPaddle();
         rightPaddle.drawPaddle();
         gameBoard.moveBall();
-        gameBoard.updateScore();
     }, 0);
 };
